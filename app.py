@@ -703,22 +703,7 @@ def main():
     </div>
     """, unsafe_allow_html=True)
 
-    # ── Scope explanation (from v1) ────────────────────────────────────────────
-    st.markdown("""
-    <div style="background:#1A1D27; border:1px solid #2E3250; border-radius:8px;
-                padding:1rem 1.5rem; margin-bottom:1.5rem; font-size:0.85rem; color:#8890A8;">
-        <b style="color:#C8D0E0;">How toxicity is determined:</b>
-        This model predicts <b style="color:#C8D0E0;">Tox21 assay-based toxicity</b> —
-        specifically whether a compound activates <b style="color:#C8D0E0;">nuclear receptors</b>
-        (NR-AR, NR-ER, NR-AhR etc.) or triggers
-        <b style="color:#C8D0E0;">cellular stress response pathways</b>
-        (SR-ARE, SR-MMP, SR-p53 etc.).
-        This covers <b style="color:#C8D0E0;">acute receptor-mediated and genotoxic toxicity</b>.
-        It does <u>not</u> cover chronic mechanisms like carcinogenicity, bioaccumulation,
-        or environmental persistence — compounds toxic via those routes (e.g. benzene, trichlorobenzene)
-        may score low here by design.
-    </div>
-    """, unsafe_allow_html=True)
+  
 
     # ── PubChem lookup ─────────────────────────────────────────────────────────
     with st.expander("🔍 Look up compound by name", expanded=False):
