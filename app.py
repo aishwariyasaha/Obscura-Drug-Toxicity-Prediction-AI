@@ -1,5 +1,5 @@
 """
-app.py — ToxPredict v2 · Drug Toxicity Prediction Interface
+app.py — Obscura · Drug Toxicity Prediction Interface
 CodeCure AI Hackathon · Track A
 
 Launch:
@@ -454,7 +454,7 @@ def make_benchmark_chart(assay_probs: dict, per_assay_auc: dict = None) -> go.Fi
         hovertemplate='<b>%{x}</b><br>Baseline: %{y:.3f}<extra></extra>',
     ))
     fig.add_trace(go.Bar(
-        name='ToxPredict (Ours)', x=tasks, y=our_vals,
+        name='Obscura (Ours)', x=tasks, y=our_vals,
         marker_color='#2563EB', marker_line_width=0, opacity=0.85,
         hovertemplate='<b>%{x}</b><br>Our AUC: %{y:.3f}<extra></extra>',
     ))
@@ -466,8 +466,14 @@ def make_benchmark_chart(assay_probs: dict, per_assay_auc: dict = None) -> go.Fi
                    gridcolor='rgba(148,163,184,0.15)'),
         yaxis=dict(range=[0.6,0.95], title="ROC-AUC",
                    gridcolor='rgba(148,163,184,0.2)', tickfont=dict(size=9)),
-        legend=dict(font=dict(size=10), bgcolor='rgba(255,255,255,0.9)',
-                    bordercolor='#E2E8F0', borderwidth=1, x=0.72, y=1.0),
+       legend=dict(
+    font=dict(size=10, color="#6B7280"),  
+    bgcolor='rgba(255,255,255,0.9)',
+    bordercolor='#E2E8F0',
+    borderwidth=1,
+    x=0.72,
+    y=1.0
+),
         height=320,
         title=dict(text="Our AUC vs MolNet Baseline (per assay)",
                    font=dict(size=11, color='#64748B'), x=0),
