@@ -4,13 +4,13 @@
 >
 > **Team Bit by Bit (B3)** — Subhagata Sardar · Hrishita Ray · Aishwariya Saha
 
-OBSCURE is a production-grade machine learning pipeline for predicting drug toxicity across all **12 Tox21 assay targets**. It uses an ensemble of LightGBM, XGBoost, and Random Forest models trained on ~7,500 comprehensive molecular features, with SHAP-based explainability and a dynamic Streamlit prediction interface.
+OBSCURA is a production-grade machine learning pipeline for predicting drug toxicity across all **12 Tox21 assay targets**. It uses an ensemble of LightGBM, XGBoost, and Random Forest models trained on ~7,500 comprehensive molecular features, with SHAP-based explainability and a dynamic Streamlit prediction interface.
 
 ---
 
 ## 📋 What Does OBSCURE Do?
 
-OBSCURE predicts whether a chemical compound is likely to be toxic based on its **molecular structure (SMILES string)**. Given a molecule, it:
+OBSCURA predicts whether a chemical compound is likely to be toxic based on its **molecular structure (SMILES string)**. Given a molecule, it:
 
 1. Standardizes and parses the SMILES into a molecular graph
 2. Engineers ~7,564 features (fingerprints + physicochemical descriptors + ADMET flags)
@@ -21,7 +21,7 @@ OBSCURE predicts whether a chemical compound is likely to be toxic based on its 
 
 ### What "Toxicity" Means Here
 
-OBSCURE predicts **Tox21 assay-based toxicity** — specifically whether a compound activates:
+OBSCURA predicts **Tox21 assay-based toxicity** — specifically whether a compound activates:
 
 - **Nuclear receptors (NR):** NR-AR, NR-ER, NR-AhR, NR-Aromatase, NR-ER-LBD, NR-PPAR-gamma
 - **Stress response pathways (SR):** SR-ARE, SR-MMP, SR-p53, SR-HSE, SR-ATAD5
