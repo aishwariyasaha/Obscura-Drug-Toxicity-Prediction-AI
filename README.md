@@ -129,8 +129,8 @@ Obscura/
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/Obscura.git
-cd Obscura
+git clone https://github.com/aishwariyasaha/Obscura-Drug-Toxicity-Prediction-AI.git
+cd Obscura-Drug-Toxicity-Prediction-AI
 ```
 
 ### 2. Install dependencies
