@@ -1,4 +1,4 @@
-# 🧬 OBSCURE — Drug Toxicity Prediction AI
+# 🧬 OBSCURA — Drug Toxicity Prediction AI
 
 > **CodeCure AI Hackathon · Track A · Drug Toxicity Prediction (Pharmacology + AI)**
 >
