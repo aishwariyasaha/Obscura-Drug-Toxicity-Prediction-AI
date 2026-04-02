@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+*.pkl
+*.npy
+data/processed/
+outputs/*.png
+outputs/*.txt
+models/*.pkl
+models/*.json
+.DS_Store
