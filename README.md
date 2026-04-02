@@ -127,22 +127,17 @@ Obscura/
 
 ## 🚀 Setup & Installation
 
-### 1. Clone the repository
-```bash
-git clone https://github.com/aishwariyasaha/Obscura-Drug-Toxicity-Prediction-AI.git
+# 1. Clone
+git clone https://github.com/subhagataa/Obscura-Drug-Toxicity-Prediction-AI.git
 cd Obscura-Drug-Toxicity-Prediction-AI
-```
 
-### 2. Install dependencies
-```bash
+# 2. Install dependencies
 pip install lightgbm xgboost scikit-learn numpy pandas matplotlib seaborn
 pip install rdkit shap joblib imbalanced-learn
 pip install streamlit pubchempy pillow
-```
 
-### 3. Download the dataset
-Place the Tox21 dataset at `data/raw/tox21.csv`.
-Dataset source: [Kaggle — Tox21 Dataset](https://www.kaggle.com/datasets/epicskills/tox21-dataset)
+# 3. Run
+streamlit run app.py
 
 ---
 
