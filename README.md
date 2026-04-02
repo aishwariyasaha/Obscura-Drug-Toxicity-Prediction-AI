@@ -1,23 +1,16 @@
-<<<<<<< HEAD
 # 🧬 Obscura — Drug Toxicity Prediction AI
-
-> **CodeCure AI Hackathon · Track A · Drug Toxicity Prediction (Pharmacology + AI)**
-
-A production-grade ML pipeline for predicting drug toxicity across all **12 Tox21 assay targets** using an ensemble of LightGBM, XGBoost, and Random Forest, with SHAP explainability and a dynamic Streamlit interface.
-=======
-# 🧬 OBSCURA — Drug Toxicity Prediction AI
 
 > **CodeCure AI Hackathon · Track A · Drug Toxicity Prediction (Pharmacology + AI)**
 >
 > **Team Bit by Bit (B3)** — Subhagata Sardar · Hrishita Ray · Aishwariya Saha
 
-OBSCURA is a production-grade machine learning pipeline for predicting drug toxicity across all **12 Tox21 assay targets**. It uses an ensemble of LightGBM, XGBoost, and Random Forest models trained on ~7,500 comprehensive molecular features, with SHAP-based explainability and a dynamic Streamlit prediction interface.
+Obscura is a production-grade machine learning pipeline for predicting drug toxicity across all **12 Tox21 assay targets**. It uses an ensemble of LightGBM, XGBoost, and Random Forest models trained on ~7,500 comprehensive molecular features, with SHAP-based explainability and a dynamic Streamlit prediction interface.
 
 ---
 
-## 📋 What Does OBSCURE Do?
+## 📋 What Does Obscura Do?
 
-OBSCURA predicts whether a chemical compound is likely to be toxic based on its **molecular structure (SMILES string)**. Given a molecule, it:
+Obscura predicts whether a chemical compound is likely to be toxic based on its **molecular structure (SMILES string)**. Given a molecule, it:
 
 1. Standardizes and parses the SMILES into a molecular graph
 2. Engineers ~7,564 features (fingerprints + physicochemical descriptors + ADMET flags)
@@ -28,13 +21,12 @@ OBSCURA predicts whether a chemical compound is likely to be toxic based on its 
 
 ### What "Toxicity" Means Here
 
-OBSCURA predicts **Tox21 assay-based toxicity** — specifically whether a compound activates:
+Obscura predicts **Tox21 assay-based toxicity** — specifically whether a compound activates:
 
 - **Nuclear receptors (NR):** NR-AR, NR-ER, NR-AhR, NR-Aromatase, NR-ER-LBD, NR-PPAR-gamma
 - **Stress response pathways (SR):** SR-ARE, SR-MMP, SR-p53, SR-HSE, SR-ATAD5
 
 This covers **acute receptor-mediated and genotoxic toxicity**. It does not cover chronic mechanisms like carcinogenicity via bioaccumulation or environmental persistence.
->>>>>>> 47c211a682f4481c34c862965ad79c7c321523d5
 
 ---
 
@@ -56,49 +48,15 @@ This covers **acute receptor-mediated and genotoxic toxicity**. It does not cove
 | SR-p53 | **0.788** | 0.766 | +0.022 |
 | **Mean** | **0.798** | 0.768 | **+0.031** |
 
-<<<<<<< HEAD
-**Aggregate:** ROC-AUC = 0.7716 · AUPR = 0.6927 · MCC = 0.4020 · Sensitivity = 0.6125
-
----
-
-## 🚀 Quick Start
-
-```bash
-pip install -r requirements.txt
-python run.py          # train (skip if models/ already exists)
-streamlit run app.py   # launch interface
-```
-
----
-
-## 🗂 Pipeline
-
-```
-SMILES → Standardization → Feature Engineering (~7K features)
-  [ECFP4/6 + FCFP4 + MACCS + RDKit FP + 200 descriptors + ADMET flags]
-  → LightGBM + XGBoost + RF → AUPR-weighted Ensemble
-  → MCC-optimal threshold (0.43) → Per-assay models (×12) → SHAP
-```
-=======
 **Aggregate metrics:** ROC-AUC = 0.772 · AUPR = 0.693 · MCC = 0.402 · Sensitivity = 0.613 · Specificity = 0.788
 
 > ROC-AUC > 0.77 is considered strong for Tox21. Published GNN-based models typically reach 0.82–0.85 with significantly more architectural complexity.
->>>>>>> 47c211a682f4481c34c862965ad79c7c321523d5
 
 ---
 
 ## 📊 Key Improvements Over Baseline
 
-<<<<<<< HEAD
-- **Features**: 3 descriptors → ~7,000 (ECFP4/6, MACCS, RDKit FP, 200 descriptors)
-- **Class imbalance**: Unhandled → sensitivity_boost=3.5, Platt calibration
-- **Evaluation**: AUC only → AUC, AUPR, MCC, Sensitivity, Specificity, Brier
-- **Ensemble**: Hardcoded → AUPR-optimized weights on validation set
-- **Threshold**: Fixed 0.5 → MCC-optimal 0.43
-- **Per-assay**: None → 12 dedicated classifiers with per-assay thresholds
-- **Explainability**: None → SHAP TreeExplainer, grouped by feature type
-=======
-| Dimension | Baseline | OBSCURE |
+| Dimension | Baseline | Obscura |
 |---|---|---|
 | Features | 3 descriptors | ~7,000 (ECFP4/6, MACCS, RDKit FP, 200 descriptors) |
 | Class imbalance | Unhandled | sensitivity_boost=3.5 + Platt calibration |
@@ -113,7 +71,7 @@ SMILES → Standardization → Feature Engineering (~7K features)
 ## 🗂️ Project Structure
 
 ```
-obscure/
+Obscura/
 │
 ├── app.py                        # Streamlit prediction interface
 ├── run.py                        # Main training pipeline
@@ -171,8 +129,8 @@ obscure/
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/obscure.git
-cd obscure
+git clone https://github.com/your-username/Obscura.git
+cd Obscura
 ```
 
 ### 2. Install dependencies
@@ -330,21 +288,11 @@ The `app.py` interface provides:
 | `shap_groups.png` | SHAP importance grouped by feature type |
 | `per_assay_auc.png` | ROC-AUC per Tox21 assay |
 | `roc_pr_curves.png` | ROC and Precision-Recall curves |
->>>>>>> 47c211a682f4481c34c862965ad79c7c321523d5
 
 ---
 
 ## 📦 Datasets
 
-<<<<<<< HEAD
-- **Primary**: [Tox21](https://www.kaggle.com/datasets/epicskills/tox21-dataset) (~7,800 compounds, 12 assays)
-- **Secondary**: [ZINC250k](https://www.kaggle.com/datasets/basu369victor/zinc250k)
-- **Optional**: [ChEMBL](https://chembl.gitbook.io/chembl-interface-documentation/downloads)
-
----
-
-> ⚠ For research purposes only. Covers Tox21 assay-based toxicity (nuclear receptors + stress pathways). Does not cover chronic toxicity, carcinogenicity, or bioaccumulation.
-=======
 - **Primary:** [Tox21](https://www.kaggle.com/datasets/epicskills/tox21-dataset) (~7,800 compounds, 12 assays)
 - **Secondary:** [ZINC250k](https://www.kaggle.com/datasets/basu369victor/zinc250k)
 - **Optional:** [ChEMBL](https://chembl.gitbook.io/chembl-interface-documentation/downloads)
@@ -361,4 +309,3 @@ The `app.py` interface provides:
 ---
 
 > ⚠ For research purposes only. Not intended for clinical or regulatory decision-making.
->>>>>>> 47c211a682f4481c34c862965ad79c7c321523d5
