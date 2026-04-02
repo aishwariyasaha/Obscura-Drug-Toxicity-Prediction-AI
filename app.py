@@ -24,6 +24,7 @@ from plotly.subplots import make_subplots
 # ── Page config ────────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="Obscura — Drug Toxicity AI",
+    page_icon="🧬",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -69,12 +70,6 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
     text-transform: uppercase;
     margin-top: 0.5rem;
 }
-.badge-row { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:1rem; }
-.badge { font-family:'JetBrains Mono',monospace; font-size:0.62rem; padding:3px 12px; border-radius:99px; font-weight:400; }
-.b-blue   { background:#DBEAFE; color:#1D4ED8; border:1px solid #BFDBFE; }
-.b-indigo { background:#E0E7FF; color:#4338CA; border:1px solid #C7D2FE; }
-.b-rose   { background:#FFE4E6; color:#BE123C; border:1px solid #FECDD3; }
-.b-slate  { background:#F1F5F9; color:#475569; border:1px solid #CBD5E1; }
 
 /* ── Inputs ── */
 div[data-testid="stTextInput"] input {
@@ -187,9 +182,6 @@ div[data-testid="stButton"] > button:hover { opacity:0.9 !important; transform:t
 .assay-bar-bg   { background:#E2E8F0; border-radius:99px; height:5px; width:100%; overflow:hidden; }
 .assay-bar-fill { height:100%; border-radius:99px; }
 
-/* ── Landing stat cards ── */
-.stat-card { background:#FFFFFF; border-radius:14px; padding:1.2rem; text-align:center; box-shadow:0 1px 6px rgba(0,0,0,0.06); }
-
 /* ── Sidebar ── */
 section[data-testid="stSidebar"] { background:#FFFFFF !important; border-right:1.5px solid #000000; }
 section[data-testid="stSidebar"] * { color:#000000; }
@@ -213,15 +205,9 @@ div[data-testid="stTextInput"] input { font-size: 0.9rem !important; }
 div[data-testid="stExpander"] { background:#FFFFFF; border:1.5px solid #E2E8F0 !important; border-radius:12px !important; }
 
 /* ── GREY EXPANDER TITLE FIX ── */
-div[data-testid="stExpander"] summary span p {
-    color: #575353 !important;
-}
-div[data-testid="stExpander"] summary svg {
-    fill: #575353 !important;
-}
-div[data-testid="stExpander"] summary {
-    color: #575353 !important;
-}
+div[data-testid="stExpander"] summary span p { color: #6B7280 !important; }
+div[data-testid="stExpander"] summary svg { fill: #6B7280 !important; }
+div[data-testid="stExpander"] summary { color: #6B7280 !important; }
 
 /* ── Misc ── */
 hr { border:none; border-top:1.5px solid #E2E8F0; margin:1.5rem 0; }
@@ -298,6 +284,7 @@ EXAMPLES = {
 def load_predictor():
     try:
         sys.path.insert(0, ".")
+        from src.ensemble import EnsembleModel
         from src.predict import ToxicityPredictor
         predictor = ToxicityPredictor.load("models/")
         return predictor, None
@@ -362,11 +349,7 @@ def assay_color(prob: float) -> str:
 PLOTLY_LAYOUT = dict(
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(0,0,0,0)",
-    font=dict(
-        family="Space Grotesk, sans-serif",
-        color="#9CA3AF",
-        size=13
-    ),
+    font=dict(family="Space Grotesk, sans-serif", color="#9CA3AF", size=13),
     margin=dict(l=10, r=10, t=36, b=10),
 )
 
@@ -698,6 +681,16 @@ def render_results(result):
     st.plotly_chart(make_benchmark_chart(result.assay_probs),
                     use_container_width=True, config={"displayModeBar": False})
 
+    # ── Disclaimer ─────────────────────────────────────────────────────────────
+    st.markdown("""
+    <div style="background:#1A1D27; border:1px solid #2E3250; border-radius:8px;
+                padding:0.8rem 1.2rem; font-size:0.75rem; color:#5A6080;
+                margin-top:2rem; text-align:center;">
+        ⚠️ For research purposes only. Not intended for clinical decision-making.
+        Predictions are based on Tox21 assay data and may not reflect all toxicity mechanisms.
+    </div>
+    """, unsafe_allow_html=True)
+
 
 # ── Main ───────────────────────────────────────────────────────────────────────
 def main():
@@ -707,6 +700,23 @@ def main():
     <div class='app-header'>
         <div class='app-title'> Obs<span>cura</span></div>
         <div class='app-sub'>AI-Powered Drug Toxicity Prediction </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # ── Scope explanation (from v1) ────────────────────────────────────────────
+    st.markdown("""
+    <div style="background:#1A1D27; border:1px solid #2E3250; border-radius:8px;
+                padding:1rem 1.5rem; margin-bottom:1.5rem; font-size:0.85rem; color:#8890A8;">
+        <b style="color:#C8D0E0;">How toxicity is determined:</b>
+        This model predicts <b style="color:#C8D0E0;">Tox21 assay-based toxicity</b> —
+        specifically whether a compound activates <b style="color:#C8D0E0;">nuclear receptors</b>
+        (NR-AR, NR-ER, NR-AhR etc.) or triggers
+        <b style="color:#C8D0E0;">cellular stress response pathways</b>
+        (SR-ARE, SR-MMP, SR-p53 etc.).
+        This covers <b style="color:#C8D0E0;">acute receptor-mediated and genotoxic toxicity</b>.
+        It does <u>not</u> cover chronic mechanisms like carcinogenicity, bioaccumulation,
+        or environmental persistence — compounds toxic via those routes (e.g. benzene, trichlorobenzene)
+        may score low here by design.
     </div>
     """, unsafe_allow_html=True)
 
@@ -772,7 +782,7 @@ def main():
         render_landing()
         return
 
-    with st.spinner(" Analysing molecular structure..."):
+    with st.spinner("Analysing molecular structure..."):
         result = predictor.predict(current_smiles)
 
     render_results(result)
